@@ -23,6 +23,26 @@ const getHeadlineSize = (headline, size, variant = "default") => {
   return portrait ? "6.65cqw" : "6.15cqw";
 };
 
+const splitHeadlineForEmphasis = (headline) => {
+  const colonIndex = headline.indexOf(":");
+
+  if (colonIndex > -1 && colonIndex < headline.length - 1) {
+    return {
+      lead: headline.slice(0, colonIndex + 1).trim(),
+      emphasis: headline.slice(colonIndex + 1).trim()
+    };
+  }
+
+  const words = headline.split(/\s+/).filter(Boolean);
+  const emphasisCount = Math.max(1, Math.ceil(words.length * 0.38));
+  const splitIndex = Math.max(1, words.length - emphasisCount);
+
+  return {
+    lead: words.slice(0, splitIndex).join(" "),
+    emphasis: words.slice(splitIndex).join(" ")
+  };
+};
+
 const TemplateFrame = ({ post, template }) => {
   const headline = post.headline.trim() || "Your headline goes here";
   const isPortrait = post.size === "3:4";
@@ -75,6 +95,33 @@ const TemplateFrame = ({ post, template }) => {
           </div>
           <h2 className="headline-readable text-balance text-white" style={canadaStyle}>
             {headline}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (template.id === "goldline-impact") {
+    const { lead, emphasis } = splitHeadlineForEmphasis(headline);
+    const impactStyle = {
+      fontSize: getHeadlineSize(headline, post.size, "feature"),
+      lineHeight: 0.98,
+      letterSpacing: "-0.025em",
+      textShadow: "0 2px 4px rgba(0, 0, 0, 0.95), 0 5px 16px rgba(0, 0, 0, 0.8)"
+    };
+
+    return (
+      <div className="relative h-full w-full overflow-hidden bg-[#111111]">
+        <ImageArea image={post.image} className="absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-black via-black/75 to-transparent" />
+        <div className="absolute bottom-[5%] left-[6%] right-[6%]">
+          <h2 className="headline-readable text-balance font-black text-[#f5bd3b]" style={impactStyle}>
+            <span className="block">{lead}</span>
+            {emphasis && (
+              <span className="mt-[1%] block">
+                {emphasis}
+              </span>
+            )}
           </h2>
         </div>
       </div>

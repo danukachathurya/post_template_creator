@@ -25,6 +25,11 @@ export const templates = [
     palette: "bg-[#fffdfb]",
     headlineClass: "text-[#17212b]",
     description: "Minimal editorial layout with a subtle Canadian-red accent."
+  },
+  {
+    id: "goldline-impact",
+    name: "Goldline Impact",
+    description: "Full-photo editorial design with bold white and gold headline emphasis."
   }
 ];
 

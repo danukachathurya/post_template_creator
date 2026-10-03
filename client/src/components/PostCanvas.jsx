@@ -59,6 +59,7 @@ const TemplateFrame = ({ post, template }) => {
     return (
       <div className="relative h-full w-full overflow-hidden">
         <ImageArea image={post.image} className="absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
         <div className="absolute bottom-[6%] left-[6%] right-[6%]">
           <div className="mb-[2.5%] flex items-center gap-[1.5%] drop-shadow-lg">
             <svg

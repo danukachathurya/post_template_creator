@@ -12,6 +12,12 @@ const getHeadlineSize = (headline, size, variant = "default") => {
     return portrait ? "6.25cqw" : "5.8cqw";
   }
 
+  if (variant === "compact-large") {
+    if (length > 95) return portrait ? "5.1cqw" : "4.7cqw";
+    if (length > 65) return portrait ? "5.8cqw" : "5.4cqw";
+    return portrait ? "6.8cqw" : "6.3cqw";
+  }
+
   if (variant === "feature") {
     if (length > 95) return portrait ? "5.05cqw" : "4.65cqw";
     if (length > 65) return portrait ? "5.85cqw" : "5.35cqw";
@@ -70,7 +76,7 @@ const TemplateFrame = ({ post, template }) => {
 
   if (template.id === "northline-canada") {
     const canadaStyle = {
-      fontSize: getHeadlineSize(headline, post.size, "compact"),
+      fontSize: getHeadlineSize(headline, post.size, "compact-large"),
       lineHeight: 1.08,
       letterSpacing: 0,
       textShadow: "0 1px 2px #000, 0 2px 8px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.85)"

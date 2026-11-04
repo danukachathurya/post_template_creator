@@ -28,10 +28,8 @@ MongoDB is optional for local UI use. To save drafts, set `MONGO_URI` in `server
 
 ## Deploy to Vercel
 
-This repository is configured as one Vercel project. The Vite frontend is built from `client`, and the Express API runs as a serverless function at `/api/*` on the same domain.
+This repository is configured as one Vercel project with two services: the Vite frontend in `client` and the Express API in `server`. Both use the same deployment domain.
 
-1. Import the repository into Vercel and keep the project root set to the repository root.
+1. Import the repository into Vercel and choose **Import multi-service project**. Keep the project root set to the repository root.
 2. Add `MONGO_URI` in the Vercel project's Environment Variables if you want draft saving. Use a MongoDB connection string reachable from Vercel.
-3. Deploy. Vercel serves the frontend and routes `/api/*` to the backend. No `VITE_API_URL` or `CLIENT_URL` is needed for this same-origin setup.
-
-For a separate frontend/backend deployment, set `VITE_API_URL` at frontend build time to the backend origin, and set `CLIENT_URL` on the backend to the frontend origin. The backend's CORS policy uses that configured origin; don't use a trailing slash.
+3. Deploy. The root `vercel.json` routes `/api/*` to the server service and other paths to the client service. The client calls `/api/posts` on the same domain.

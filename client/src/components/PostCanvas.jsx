@@ -53,11 +53,13 @@ const TemplateFrame = ({ post, template }) => {
   const headline = post.headline.trim() || "Your headline goes here";
   const isPortrait = post.size === "3:4";
 
-  if (template.id === "cinematic-bottom") {
+  if (template.id === "cinematic-bottom" || template.id === "cinematic-bottom-anton") {
+    const isAnton = template.id === "cinematic-bottom-anton";
     const cinematicStyle = {
       fontSize: getHeadlineSize(headline, post.size, "feature"),
-      lineHeight: 1.08,
-      letterSpacing: 0
+      lineHeight: isAnton ? 1.28 : 1.08,
+      letterSpacing: isAnton ? "0.035em" : 0,
+      ...(isAnton ? { fontFamily: "Anton, Impact, sans-serif", fontWeight: 400 } : {})
     };
 
     return (
@@ -65,7 +67,7 @@ const TemplateFrame = ({ post, template }) => {
         <ImageArea image={post.image} className="absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/15" />
         <div className="absolute bottom-[6%] left-[6%] right-[6%]">
-          <div className="mb-[4%] h-[0.95cqw] w-[28%] bg-[#f97316]" />
+          <div className={`mb-[4%] h-[0.95cqw] w-[28%] ${isAnton ? "bg-[#fbbf24]" : "bg-[#f97316]"}`} />
           <h2 className="headline-readable text-balance text-white drop-shadow-2xl" style={cinematicStyle}>
             {headline}
           </h2>
@@ -129,6 +131,33 @@ const TemplateFrame = ({ post, template }) => {
               </span>
             )}
           </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (template.id === "pro-news-anton") {
+    const antonStyle = {
+      fontSize: getHeadlineSize(headline, post.size, "feature"),
+      lineHeight: 1.28,
+      letterSpacing: "0.025em",
+      fontFamily: "Anton, Impact, sans-serif",
+      fontWeight: 400
+    };
+
+    return (
+      <div className="relative flex h-full w-full overflow-hidden bg-[#0f172a]">
+        <ImageArea image={post.image} className="absolute inset-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/25 to-transparent" />
+        <div className="absolute left-[5.5%] top-[5%] h-[1.2cqw] w-[24%] bg-[#2563eb] shadow-xl" />
+        <div className="absolute bottom-0 left-0 right-0">
+          <div className={`${isPortrait ? "px-[5.5%] pb-[5.5%] pt-[18%]" : "px-[5.5%] pb-[5.5%] pt-[12%]"} bg-gradient-to-t from-[#0f172a] via-[#0f172a]/95 to-transparent`}>
+            <div className="max-w-[94%]">
+              <h2 className="headline-readable text-balance text-white" style={antonStyle}>
+                {headline}
+              </h2>
+            </div>
+          </div>
         </div>
       </div>
     );

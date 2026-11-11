@@ -9,6 +9,15 @@ export const templates = [
     description: "Premium lower-third news style with strong feed contrast."
   },
   {
+    id: "pro-news-anton",
+    name: "Pro News Anton",
+    badge: "Breaking",
+    accent: "#2563eb",
+    palette: "bg-[#111827]",
+    headlineClass: "text-white bg-[#111827]",
+    description: "A clean Pro News layout with bold Anton lettering and a blue accent."
+  },
+  {
     id: "cinematic-bottom",
     name: "Cinematic Bottom",
     badge: "",
@@ -16,6 +25,15 @@ export const templates = [
     palette: "bg-[#020617]",
     headlineClass: "text-white",
     description: "Movie-poster style crop with a powerful bottom headline."
+  },
+  {
+    id: "cinematic-bottom-anton",
+    name: "Cinematic Bottom Anton",
+    badge: "",
+    accent: "#fbbf24",
+    palette: "bg-[#020617]",
+    headlineClass: "text-white",
+    description: "The cinematic full-image layout with bold Anton headlines."
   },
   {
     id: "northline-canada",

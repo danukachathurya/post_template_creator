@@ -45,6 +45,15 @@ export const templates = [
     description: "Minimal editorial layout with a subtle Canadian-red accent."
   },
   {
+    id: "canada-essence",
+    name: "Canada Essence",
+    badge: "",
+    accent: "#d52b1e",
+    palette: "bg-[#17212b]",
+    headlineClass: "text-white",
+    description: "Canadian Essence branding with a clear Anton headline over a dark photo fade."
+  },
+  {
     id: "goldline-impact",
     name: "Goldline Impact",
     description: "Full-photo editorial design with bold white and gold headline emphasis."

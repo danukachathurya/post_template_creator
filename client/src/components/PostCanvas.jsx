@@ -18,6 +18,12 @@ const getHeadlineSize = (headline, size, variant = "default") => {
     return portrait ? "6.8cqw" : "6.3cqw";
   }
 
+  if (variant === "anton-large") {
+    if (length > 95) return portrait ? "5.25cqw" : "4.85cqw";
+    if (length > 65) return portrait ? "5.95cqw" : "5.55cqw";
+    return portrait ? "6.95cqw" : "6.45cqw";
+  }
+
   if (variant === "feature") {
     if (length > 95) return portrait ? "5.05cqw" : "4.65cqw";
     if (length > 65) return portrait ? "5.85cqw" : "5.35cqw";
@@ -56,7 +62,7 @@ const TemplateFrame = ({ post, template }) => {
   if (template.id === "cinematic-bottom" || template.id === "cinematic-bottom-anton") {
     const isAnton = template.id === "cinematic-bottom-anton";
     const cinematicStyle = {
-      fontSize: getHeadlineSize(headline, post.size, "feature"),
+      fontSize: getHeadlineSize(headline, post.size, isAnton ? "anton-large" : "feature"),
       lineHeight: isAnton ? 1.28 : 1.08,
       letterSpacing: isAnton ? "0.035em" : 0,
       ...(isAnton ? { fontFamily: "Anton, Impact, sans-serif", fontWeight: 400 } : {})
@@ -78,7 +84,7 @@ const TemplateFrame = ({ post, template }) => {
 
   if (template.id === "northline-canada") {
     const canadaStyle = {
-      fontSize: getHeadlineSize(headline, post.size, "compact-large"),
+      fontSize: getHeadlineSize(headline, post.size, "anton-large"),
       lineHeight: 1.08,
       letterSpacing: 0,
       textShadow: "0 1px 2px #000, 0 2px 8px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.85)"
@@ -102,6 +108,41 @@ const TemplateFrame = ({ post, template }) => {
             </span>
           </div>
           <h2 className="headline-readable text-balance text-white" style={canadaStyle}>
+            {headline}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (template.id === "canada-essence") {
+    const essenceStyle = {
+      fontSize: getHeadlineSize(headline, post.size, "compact"),
+      lineHeight: 1.2,
+      letterSpacing: "0.025em",
+      fontFamily: "Anton, Impact, sans-serif",
+      fontWeight: 400,
+      textShadow: "0 2px 4px rgba(0, 0, 0, 0.75)"
+    };
+
+    return (
+      <div className="relative h-full w-full overflow-hidden bg-[#17212b]">
+        <ImageArea image={post.image} className="absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-[56%] bg-gradient-to-t from-black/95 via-black/65 to-transparent" />
+        <div className="absolute bottom-[6%] left-[6%] right-[6%]">
+          <div className="mb-[2.5%] flex items-center gap-[1.5%]">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 64 64"
+              className="h-[3.2cqw] w-[3.2cqw] shrink-0 fill-[#d52b1e]"
+            >
+              <path d="m32 3 5 15 12-7-2 13 14-2-12 12 5 4-15-2-4 14-3-4-3 4-4-14-15 2 5-4L3 22l14 2-2-13 12 7 5-15Zm-2 46h4v12h-4z" />
+            </svg>
+            <span className="text-[2cqw] font-semibold uppercase tracking-[0.2em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
+              Canadian Essence
+            </span>
+          </div>
+          <h2 className="headline-readable text-balance text-white" style={essenceStyle}>
             {headline}
           </h2>
         </div>
@@ -138,8 +179,8 @@ const TemplateFrame = ({ post, template }) => {
 
   if (template.id === "pro-news-anton") {
     const antonStyle = {
-      fontSize: getHeadlineSize(headline, post.size, "feature"),
-      lineHeight: 1.28,
+      fontSize: getHeadlineSize(headline, post.size, "compact-large"),
+      lineHeight: 1.2,
       letterSpacing: "0.025em",
       fontFamily: "Anton, Impact, sans-serif",
       fontWeight: 400

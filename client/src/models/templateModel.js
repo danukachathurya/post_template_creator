@@ -54,6 +54,15 @@ export const templates = [
     description: "Canadian Essence branding with a clear Anton headline over a dark photo fade."
   },
   {
+    id: "pure-clean",
+    name: "Pure Clean",
+    badge: "",
+    accent: "#334155",
+    palette: "bg-white",
+    headlineClass: "text-slate-950",
+    description: "A plain, clean layout with an unobstructed photo and simple headline."
+  },
+  {
     id: "goldline-impact",
     name: "Goldline Impact",
     description: "Full-photo editorial design with bold white and gold headline emphasis."

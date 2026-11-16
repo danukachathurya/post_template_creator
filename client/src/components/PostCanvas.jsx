@@ -177,6 +177,14 @@ const TemplateFrame = ({ post, template }) => {
     );
   }
 
+  if (template.id === "pure-clean") {
+    return (
+      <div className="h-full w-full overflow-hidden bg-white">
+        <ImageArea image={post.image} />
+      </div>
+    );
+  }
+
   if (template.id === "pro-news-anton") {
     const antonStyle = {
       fontSize: getHeadlineSize(headline, post.size, "compact-large"),

@@ -1,5 +1,5 @@
 import { Clipboard, Download, ImagePlus, Save, Type } from "lucide-react";
-import { qualities, sizes } from "../models/postModel";
+import { logoStyles, qualities, sizes } from "../models/postModel";
 import { templates } from "../models/templateModel";
 
 const ControlPanel = ({
@@ -39,6 +39,52 @@ const ControlPanel = ({
             placeholder="Type a powerful Facebook headline"
           />
           <div className="mt-1 text-right text-xs text-slate-500">{post.headline.length}/200</div>
+        </section>
+
+        <section>
+          <label htmlFor="page-name" className="mb-2 block text-sm font-semibold text-slate-800">
+            Logo title / page name <span className="font-normal text-slate-500">(optional)</span>
+          </label>
+          <input
+            id="page-name"
+            type="text"
+            value={post.pageName || ""}
+            onChange={(event) => updatePost("pageName", event.target.value)}
+            maxLength={40}
+            className="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-900 outline-none transition focus:border-rose-400 focus:bg-white focus:ring-2 focus:ring-rose-100"
+            placeholder="Enter your page name"
+          />
+        </section>
+
+        <section>
+          <h2 className="mb-2 text-sm font-semibold text-slate-800">Logo style</h2>
+          <div className="grid grid-cols-2 gap-2">
+            {logoStyles.map((style) => (
+              <button
+                key={style.id}
+                type="button"
+                onClick={() => updatePost("logoStyleId", style.id)}
+                aria-pressed={(post.logoStyleId || "classic") === style.id}
+                className={`rounded-md border p-2 text-left transition ${
+                  (post.logoStyleId || "classic") === style.id
+                    ? "border-rose-500 bg-rose-50"
+                    : "border-slate-200 bg-white hover:border-slate-300"
+                }`}
+              >
+                <span className={`mb-2 inline-flex max-w-full items-center gap-1.5 px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                  style.id === "classic" ? "border-l-2 border-[#d52b1e] bg-[#07111f] text-white" :
+                  style.id === "pill" ? "rounded-full bg-[#07111f] text-white" :
+                  style.id === "red-banner" ? "bg-[#d52b1e] text-white" :
+                  style.id === "gold-outline" ? "border border-amber-400 bg-[#07111f] text-amber-300" :
+                  "bg-transparent text-slate-800"
+                }`}>
+                  {style.id === "minimal" && <span className="text-rose-600">●</span>}
+                  Page name
+                </span>
+                <span className="block text-xs font-medium text-slate-800">{style.name}</span>
+              </button>
+            ))}
+          </div>
         </section>
 
         <section>

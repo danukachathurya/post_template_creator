@@ -190,7 +190,10 @@ const TemplateFrame = ({ post, template }) => {
       <div className="relative flex h-full w-full overflow-hidden bg-[#0f172a]">
         <ImageArea image={post.image} className="absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/25 to-transparent" />
-        <div className="absolute left-[5.5%] top-[5%] h-[1.2cqw] w-[24%] bg-[#2563eb] shadow-xl" />
+        <div
+          className="absolute left-[5.5%] h-[1.2cqw] w-[24%] bg-[#2563eb] shadow-xl"
+          style={{ top: post.pageName?.trim() ? "13%" : "5%" }}
+        />
         <div className="absolute bottom-0 left-0 right-0">
           <div className={`${isPortrait ? "px-[5.5%] pb-[5.5%] pt-[18%]" : "px-[5.5%] pb-[5.5%] pt-[12%]"} bg-gradient-to-t from-[#0f172a] via-[#0f172a]/95 to-transparent`}>
             <div className="max-w-[94%]">
@@ -214,7 +217,10 @@ const TemplateFrame = ({ post, template }) => {
     <div className="relative flex h-full w-full overflow-hidden bg-[#0f172a]">
       <ImageArea image={post.image} className="absolute inset-0" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/25 to-transparent" />
-      <div className="absolute left-[5.5%] top-[5%] h-[1.2cqw] w-[24%] bg-[#e11d48] shadow-xl" />
+      <div
+        className="absolute left-[5.5%] h-[1.2cqw] w-[24%] bg-[#e11d48] shadow-xl"
+        style={{ top: post.pageName?.trim() ? "13%" : "5%" }}
+      />
       <div className="absolute bottom-0 left-0 right-0">
         <div className={`${isPortrait ? "px-[5.5%] pb-[5.5%] pt-[18%]" : "px-[5.5%] pb-[5.5%] pt-[12%]"} bg-gradient-to-t from-[#0f172a] via-[#0f172a]/95 to-transparent`}>
           <div className="max-w-[94%]">
@@ -242,6 +248,52 @@ const ImageArea = ({ image, className = "" }) => (
   </div>
 );
 
+const BrandTitle = ({ pageName, logoStyleId = "classic" }) => {
+  const title = pageName?.trim();
+  if (!title) return null;
+
+  const styles = {
+    classic: {
+      container: "bg-[#07111f]/90 shadow-lg",
+      mark: "bg-[#d52b1e]",
+      text: "text-white"
+    },
+    pill: {
+      container: "rounded-full bg-[#07111f]/90 shadow-lg",
+      mark: "rounded-full bg-[#d52b1e]",
+      text: "text-white"
+    },
+    "red-banner": {
+      container: "bg-[#d52b1e] shadow-lg",
+      mark: "bg-white",
+      text: "text-white"
+    },
+    "gold-outline": {
+      container: "border border-amber-400 bg-[#07111f]/90 shadow-lg",
+      mark: "bg-amber-400",
+      text: "text-amber-300"
+    },
+    minimal: {
+      container: "bg-transparent drop-shadow-lg",
+      mark: "rounded-full bg-[#d52b1e]",
+      text: "text-white [text-shadow:0_2px_6px_rgba(0,0,0,0.9)]"
+    }
+  };
+  const style = styles[logoStyleId] || styles.classic;
+
+  return (
+    <div className={`absolute left-[4%] top-[4%] z-20 flex w-fit max-w-[92%] items-center gap-[2.5%] px-[2%] py-[1.2%] backdrop-blur-[2px] ${style.container}`}>
+      <span className={`h-[2.6cqw] w-[0.7cqw] shrink-0 ${style.mark}`} />
+      <span
+        className={`whitespace-nowrap text-[2.6cqw] uppercase leading-[1.1] tracking-[0.1em] ${style.text}`}
+        style={{ fontFamily: "Anton, Impact, sans-serif", fontWeight: 400 }}
+      >
+        {title}
+      </span>
+    </div>
+  );
+};
+
 const PostCanvas = forwardRef(({ post }, ref) => {
   const size = getSizeById(post.size);
   const template = getTemplateById(post.templateId);
@@ -255,13 +307,14 @@ const PostCanvas = forwardRef(({ post }, ref) => {
         </div>
         <div
           ref={ref}
-          className="mx-auto overflow-hidden bg-white shadow-2xl [container-type:inline-size]"
+          className="relative mx-auto overflow-hidden bg-white shadow-2xl [container-type:inline-size]"
           style={{
             aspectRatio: `${size.width} / ${size.height}`,
             width: post.size === "3:4" ? "min(100%, 460px)" : "min(100%, 620px)"
           }}
         >
           <TemplateFrame post={post} template={template} />
+          <BrandTitle pageName={post.pageName} logoStyleId={post.logoStyleId} />
         </div>
       </div>
     </div>

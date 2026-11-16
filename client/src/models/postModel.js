@@ -1,10 +1,20 @@
 export const defaultPost = {
   headline: "Your headline goes here",
+  pageName: "",
+  logoStyleId: "classic",
   image: "",
   templateId: "sample-news",
   size: "1:1",
   quality: "high"
 };
+
+export const logoStyles = [
+  { id: "classic", name: "Classic" },
+  { id: "pill", name: "Pill" },
+  { id: "red-banner", name: "Red banner" },
+  { id: "gold-outline", name: "Gold outline" },
+  { id: "minimal", name: "Minimal" }
+];
 
 export const sizes = [
   {

@@ -8,6 +8,17 @@ const postSchema = new mongoose.Schema(
       trim: true,
       maxlength: 200
     },
+    pageName: {
+      type: String,
+      trim: true,
+      maxlength: 40,
+      default: ""
+    },
+    logoStyleId: {
+      type: String,
+      enum: ["classic", "pill", "red-banner", "gold-outline", "minimal"],
+      default: "classic"
+    },
     imageUrl: {
       type: String,
       trim: true,

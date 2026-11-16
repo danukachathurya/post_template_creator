@@ -1,6 +1,8 @@
 export const saveDraft = async (post) => {
   const payload = {
     headline: post.headline,
+    pageName: post.pageName || "",
+    logoStyleId: post.logoStyleId || "classic",
     imageUrl: post.image,
     templateId: post.templateId,
     size: post.size,
